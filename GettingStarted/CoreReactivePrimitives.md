@@ -1,8 +1,8 @@
 # Core Reactive Primitives
 
-1. [Signal](#Signal: a unidirectional stream of events.)
+1. [`Signal`](#signal-a-unidirectional-stream-of-events)
 
-1. [Event](#Event: the basic transfer unit of an event stream.)
+1. [`Event`](#event-the-basic-transfer-unit-of-an-event-stream)
 
 1. [SIgnalProducer](#SignalProducer: deferred work that creates a stream of values.)
 
@@ -10,9 +10,9 @@
 
 1. [Action](#Action: a serialized worker with a preset action.)
 
-1. [Lifetime](#Lifetime: limits the scope of an observation)
+1. [`Lifetime`](#lifetime-limits-the-scope-of-an-observation)
 
-### Signal: a unidirectional stream of events.
+### `Signal`: a unidirectional stream of events.
 
 > 信号: 单方向的事件流
 
@@ -31,7 +31,7 @@ channel.observeValues { program in ... }
 
 See also: The ```Signal``` overview, The ```Signal``` contract, The ```Signal``` API reference
 
-### Event: the basic transfer unit of an event stream.
+### `Event`: the basic transfer unit of an event stream.
 
 > 事件：事件流的基本传输单元。
 
@@ -45,11 +45,11 @@ It is like a frame in a one-time live feed — seas of data frames carry the vis
 
 See also: The ```Event``` overview, The ```Event``` contract, The ```Event``` API reference
 
-### SignalProducer: deferred work that creates a stream of values.
+### `SignalProducer`: deferred work that creates a stream of values.
 
 > SignalProducer：延迟创建值流。
 
-```SignalProducer``` defers work — of which the output is represented as a stream of values — until it is started. For every invocation to start the SignalProducer, a new Signal is created and the deferred work is subsequently invoked.
+`SignalProducer` defers work — of which the output is represented as a stream of values — until it is started. For every invocation to start the SignalProducer, a new Signal is created and the deferred work is subsequently invoked.
 
 > SignalProducer 当它被启动时才会创建（输出为值流）。对于每次启动SignalProducer的调用，都会创建一个新的Signal，并随后调用延迟的工作。
 
@@ -65,7 +65,7 @@ interrupter.dispose()
 
 See also: The ```SignalProducer``` overview, The ```SignalProducer``` contract, The ```SignalProducer``` API reference
 
-### Property: an observable box that always holds a value.
+### `Property`: an observable box that always holds a value.
 
 > 属性：一个始终有值的观察盒。
 
@@ -85,7 +85,7 @@ currentTime.signal.observeValues { timeBar.timeLabel.text = "\($0)" }
 
 See also: The ```Property``` overview, The ```Property``` contract, The ```Property``` API reference
 
-### Action: a serialized worker with a preset action.
+### `Action`: a serialized worker with a preset action.
 
 > 操作：具有预设操作的序列化事件。
 
