@@ -4,19 +4,19 @@
 
 1. [`Event`](#event-the-basic-transfer-unit-of-an-event-stream)
 
-1. [SIgnalProducer](#SignalProducer: deferred work that creates a stream of values.)
+1. [`SIgnalProducer`](#signalProducer-deferred-work-that-creates-a-stream-of-values)
 
-1. [Property](#Property: an observable box that always holds a value.)
+1. [`Property`](#property-an-observable-box-that-always-holds-a-value)
 
-1. [Action](#Action: a serialized worker with a preset action.)
+1. [`Action`](#action-a-serialized-worker-with-a-preset-action)
 
 1. [`Lifetime`](#lifetime-limits-the-scope-of-an-observation)
 
-### `Signal`: a unidirectional stream of events.
+### [`Signal`](../Signal/Signal.md): a unidirectional stream of events.
 
 > 信号: 单方向的事件流
 
-The owner of a ```Signal``` has unilateral control of the event stream. ```Observers``` may register their interests in the future events at any time, but the observation would have no side effect on the stream or its owner.
+The owner of a [`Signal`](../Signal/Signal.md) has unilateral control of the event stream. ```Observers``` may register their interests in the future events at any time, but the observation would have no side effect on the stream or its owner.
 
 > 信号的所有者可以单方面控制事件流。观察者(Observers)可以在未来的任何时候注册并成为此事件的观察者，并且观察者对事件流或其所有者没有任何副作用。
 
@@ -29,13 +29,13 @@ let channel: Signal<Program, NoError> = tvStation.channelOne
 channel.observeValues { program in ... }
 ```
 
-See also: The ```Signal``` overview, The ```Signal``` contract, The ```Signal``` API reference
+See also: The [`Signal`](../Signal/Signal.md) overview, The ```Signal``` contract, The ```Signal``` API reference
 
 ### `Event`: the basic transfer unit of an event stream.
 
 > 事件：事件流的基本传输单元。
 
-A ```Signal``` may have any arbitrary number of events carrying a value, following by an eventual terminal event of a specific reason.
+A [`Signal`](../Signal/Signal.md) may have any arbitrary number of events carrying a value, following by an eventual terminal event of a specific reason.
 
 > 信号可以拥有任意数量的带值事件，衍生成特定值最终事件。
 
@@ -45,13 +45,13 @@ It is like a frame in a one-time live feed — seas of data frames carry the vis
 
 See also: The ```Event``` overview, The ```Event``` contract, The ```Event``` API reference
 
-### `SignalProducer`: deferred work that creates a stream of values.
+### [`SignalProducer`](../SignalProducer/SignalProducer.md): deferred work that creates a stream of values.
 
-> SignalProducer：延迟创建值流。
+> [`SignalProducer`](../SignalProducer/SignalProducer.md)：延迟创建值流。
 
-`SignalProducer` defers work — of which the output is represented as a stream of values — until it is started. For every invocation to start the SignalProducer, a new Signal is created and the deferred work is subsequently invoked.
+[`SignalProducer`](../SignalProducer/SignalProducer.md) defers work — of which the output is represented as a stream of values — until it is started. For every invocation to start the SignalProducer, a new Signal is created and the deferred work is subsequently invoked.
 
-> SignalProducer 当它被启动时才会创建（输出为值流）。对于每次启动SignalProducer的调用，都会创建一个新的Signal，并随后调用延迟的工作。
+> [`SignalProducer`](../SignalProducer/SignalProducer.md) 当它被启动时才会创建（输出为值流）。对于每次启动[`SignalProducer`](../SignalProducer/SignalProducer.md)的调用，都会创建一个新的Signal，并随后调用延迟的工作。
 
 It is like a on-demand streaming service — even though the episode is streamed like a live TV feed, you can choose what you watch, when to start watching and when to interrupt it.
 
@@ -63,13 +63,13 @@ let interrupter = frames.start { frame in ... }
 interrupter.dispose()
 ```
 
-See also: The ```SignalProducer``` overview, The ```SignalProducer``` contract, The ```SignalProducer``` API reference
+See also: The [`SignalProducer`](../SignalProducer/SignalProducer.md) overview, The ```SignalProducer``` contract, The ```SignalProducer``` API reference
 
-### `Property`: an observable box that always holds a value.
+### [`Property`](../Property/Property.md): an observable box that always holds a value.
 
 > 属性：一个始终有值的观察盒。
 
-```Property``` is a variable that can be observed for its changes. In other words, it is a stream of values with a stronger guarantee than ```Signal``` — the latest value is always available, and the stream would never fail.
+[`Property`](../Property/Property.md) is a variable that can be observed for its changes. In other words, it is a stream of values with a stronger guarantee than [`Signal`](../Signal/Signal.md) — the latest value is always available, and the stream would never fail.
 
 > 属性是可以观察其变化的变量。换句话说，它是一个具有比Signal更强保证的值流 - 会一直提供一个可用的不会失败的新值。
 
@@ -83,15 +83,15 @@ print("Current time offset: \(currentTime.value)")
 currentTime.signal.observeValues { timeBar.timeLabel.text = "\($0)" }
 ```
 
-See also: The ```Property``` overview, The ```Property``` contract, The ```Property``` API reference
+See also: The [`Property`](../Property/Property.md) overview, The ```Property``` contract, The ```Property``` API reference
 
-### `Action`: a serialized worker with a preset action.
+### [`Action`](../Action/Action.md): a serialized worker with a preset action.
 
 > 操作：具有预设操作的序列化事件。
 
-When being invoked with an input, Action apply the input and the latest state to the preset action, and pushes the output to any interested parties.
+When being invoked with an input, [`Action`](../Action/Action.md) apply the input and the latest state to the preset action, and pushes the output to any interested parties.
 
-> 使用带有输入值(Input)的操作(Action)时，操作(Action)会捕获输入的值(Input)和最新状态应用于预设操作，并将输出推送给任何感兴趣的观察者。
+> 使用带有输入值(Input)的操作([`Action`](../Action/Action.md))时，操作([`Action`](../Action/Action.md))会捕获输入的值(Input)和最新状态应用于预设操作，并将输出推送给任何感兴趣的观察者。
 
 It is like an automatic vending machine — after choosing an option with coins inserted, the machine would process the order and eventually output your wanted snack. Notice that the entire process is mutually exclusive — you cannot have the machine to serve two customers concurrently.
 
@@ -133,15 +133,15 @@ purchase.values.observeValues(salesRecorder.record)
 }
 ```
 
-See also: The ```Action``` overview, The ```Action``` API reference
+See also: The [`Action`](../Action/Action.md) overview, The ```Action``` API reference
 
-### Lifetime: limits the scope of an observation
+### [`Lifetime`](../Lifetime/Lifetime.md): limits the scope of an observation
 
 > 寿命：限制观察的范围
 
-When observing a ```Signal``` or ```SignalProducer```, it doesn’t make sense to continue emitting values if there’s no longer anyone observing them. Consider the video stream: once you stop watching the video, the stream can be automatically closed by providing a ```Lifetime```:
+When observing a [`Signal`](../Signal/Signal.md) or [`SignalProducer`](../SignalProducer/SignalProducer.md), it doesn’t make sense to continue emitting values if there’s no longer anyone observing them. Consider the video stream: once you stop watching the video, the stream can be automatically closed by providing a [`Lifetime`](../Lifetime/Lifetime.md):
 
-> 观察Signal或SignalProducer时，如果没有人观察它们，继续提供值是没有意义的。以视频流为例：一旦您停止观看视频，拥有寿命(Lifetime)的流可以自动关闭：
+> 观察[`Signal`](../Signal/Signal.md)或[`SignalProducer`](../SignalProducer/SignalProducer.md)时，如果没有人观察它们，继续提供值是没有意义的。以视频流为例：一旦您停止观看视频，拥有寿命([`Lifetime`](../Lifetime/Lifetime.md))的流可以自动关闭：
 
 ```swift
 class VideoPlayer {
@@ -154,4 +154,4 @@ frames.take(during: lifetime).start { frame in ... }
 }
 ```
 
-See also: The ```Lifetime``` overview, The ```Lifetime``` API reference
+See also: The [`Lifetime`](../Lifetime/Lifetime.md) overview, The ```Lifetime``` API reference
