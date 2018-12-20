@@ -26,7 +26,7 @@ This document will use the term “event stream” when dealing with concepts th
 
 [`Signal`](../Signal/Signal.md)s can be observed with the `observe` function.
 
-> 可以通过`observer`来观察信号（[`Signal`](../Signal/Signal.md)）
+> 可以通过`observer()`来观察信号（[`Signal`](../Signal/Signal.md)）
 
 ```swift
 signal.observe { event in
@@ -100,7 +100,7 @@ Note that it is not necessary to provide all parameters - all of them are option
 
 Note that nothing will be printed until `producer` is started (possibly somewhere else).
 
-> 请注意，在生产者启动之前不会打印任何内容（可能在其他地方）。
+> 请注意，在`prodecer`启动（`start()`）之前不会打印任何内容（你可以在之后的任意时候启动）。
 
 
 
@@ -112,15 +112,15 @@ Note that nothing will be printed until `producer` is started (possibly somewher
 
 [`Signal`](../Signal/Signal.md) operators can be *lifted* to operate upon [`SignalProducer`](../SignalProducer/SignalProducer.md) using the `lift` method.
 
-> 可以使用提升（`lift`）方法将信号（[`Signal`](../Signal/Signal.md)）提升为[`SignalProducer`](../SignalProducer/SignalProducer.md) 进行操作。
+> 信号（[`Signal`](../Signal/Signal.md)）的操作符可以被*`lifted`*，即通过[`SignalProducer`](../SignalProducer/SignalProducer.md) 的`lift()`进行封装。
 
 This will create a new [`SignalProducer`](../SignalProducer/SignalProducer.md) which will apply the given operator to *every* [`Signal`](../Signal/Signal.md) created, just as if the operator had been applied to each produced [`Signal`](../Signal/Signal.md) individually.
 
-> 这将创建一个新的SignalProducer，它将给定的运算符应用于创建的每个Signal，就像操作符已单独应用于每个生成的Signal一样。
+> 这将创建一个新的SignalProducer，它将给定的运算符应用于创建的每个Signal上，就像操作符已单独应用于每个生成的Signal一样。
 
 
 
-##Transforming event streams
+### Transforming event streams
 
 These operators transform an event stream into a new stream.
 
